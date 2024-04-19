@@ -9,6 +9,10 @@ import datetime
 import collections
 import os, sys, argparse
 
+# 改行調整用
+import re
+import unicodedata
+
 class ConvertPDF2text():
     """
     PDFをtxtに変換する。
@@ -31,10 +35,10 @@ class ConvertPDF2text():
                     開始ページ(1スタート)
                     終了ページ(1スタート)
         """
-        self.input_path = r'70_197.pdf'
+        self.input_path = r'input.pdf'
         self.output_path = '{}.txt'.format(datetime.datetime.now().strftime("%m%d_%H%M_%S"))
         self.border = 0     # 段組みの切れ目のx座標 0の時ページの真ん中に設定
-        self.footer = 60    # フッターのy座標。ページの最下部が0。これより下の位置の文字は抽出しない
+        self.footer = 50    # フッターのy座標。ページの最下部が0。これより下の位置の文字は抽出しない
         self.header = 1000  # ヘッダーのy座標。 これより上の位置の文字は抽出しない
         self.start_page = 1 # 開始ページ1スタート
         self.last_page = 0  # 終了ページ1スタート
@@ -99,8 +103,9 @@ class ConvertPDF2text():
         Args:
             f:      書き込みファイル
         """
-        f.write(self.text_l)
-        f.write(self.text_r)
+        f.write("\n".join(textParser(self.text_l)))
+        f.write("\n".join(textParser(self.text_r)))
+        f.write("\n\n")   # ページ間の改行
         self.text_l = self.text_r = ""
 
     def convert_pdf_to_text(self):
@@ -147,7 +152,8 @@ class ConvertPDF2text():
                     if element.y0 > self.header: continue  # ヘッダー位置の文字は抽出しない
                     _text =element.get_text()
                     # debug
-                    # print("y1:{}, y0:{}■{}".format(element.y1, element.y0, _text))
+                    print("x1:{}, x0:{}■{}".format(element.x1, element.x0, _text))
+                    print("y1:{}, y0:{}■{}".format(element.y1, element.y0, _text))
 
                     if element.x1 < self.border:
                         # 文字列全体が左側
@@ -165,6 +171,60 @@ class ConvertPDF2text():
 
                 # 1ページ分処理したら書き込む
                 self.write2text(f)
+
+def len_(text):
+    cnt = 0
+    for t in text:
+        if unicodedata.east_asian_width(t) in "FWA":
+            cnt += 2
+        else:
+            cnt += 1
+    return cnt
+
+
+def textParser(text, n=30, bracketDetect=True):
+    text = text.splitlines()
+    sentences = []
+    t = ""
+    bra_cnt = ket_cnt = bra_cnt_jp = ket_cnt_jp = 0
+    for i in range(len(text)):
+        if not bool(re.search("\S", text[i])): continue
+        if bracketDetect:
+            bra_cnt += len(re.findall("[\(（]", text[i]))
+            ket_cnt += len(re.findall("[\)）]", text[i]))
+            bra_cnt_jp += len(re.findall("[｢「『]", text[i]))
+            ket_cnt_jp += len(re.findall("[｣」』]", text[i]))
+        if i != len(text) - 1:
+            if bool(re.fullmatch(r"[A-Z\s]+", text[i])):
+                if t != "": sentences.append(t)
+                t = ""
+                sentences.append(text[i])
+            elif bool(
+                    re.match(
+                        "(\d{1,2}[\.,、．]\s?(\d{1,2}[\.,、．]*)*\s?|I{1,3}V{0,1}X{0,1}[\.,、．]|V{0,1}X{0,1}I{1,3}[\.,、．]|[・•●])+\s",
+                        text[i])) or re.match("\d{1,2}．\w", text[i]) or (
+                            bool(re.match("[A-Z]", text[i][0]))
+                            and abs(len_(text[i]) - len_(text[i + 1])) > n
+                            and len_(text[i]) < n):
+                if t != "": sentences.append(t)
+                t = ""
+                sentences.append(text[i])
+            elif (
+                    text[i][-1] not in ("。", ".", "．") and
+                (abs(len_(text[i]) - len_(text[i + 1])) < n or
+                 (len_(t + text[i]) > len_(text[i + 1]) and bool(
+                     re.search("[。\.．]\s\d|..[。\.．]|.[。\.．]", text[i + 1][-3:])
+                     or bool(re.match("[A-Z]", text[i + 1][:1]))))
+                 or bool(re.match("\s?[a-z,\)]", text[i + 1]))
+                 or bra_cnt > ket_cnt or bra_cnt_jp > ket_cnt_jp)):
+                t += text[i]
+            else:
+                sentences.append(t + text[i])
+                t = ""
+        else:
+            sentences.append(t + text[i])
+    return sentences
+
 
 if __name__ == "__main__":
     cnv = ConvertPDF2text(sys.argv[1:])

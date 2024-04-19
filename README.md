@@ -1,55 +1,88 @@
 # Python-PDF2text
 
-## ŠT—v Description
-PDFƒtƒ@ƒCƒ‹‚ğ“Ç‚ñ‚Å•¶š‚ğƒeƒLƒXƒgƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B  
+## æ¦‚è¦
+
+PDF2Textã«PDFã®æ”¹è¡Œèª¿æ•´ã‚’çµ„ã¿åˆã‚ã›ãŸã‚‚ã®ã§ã™ã€‚
+
+## ç”¨ç´™ã‚µã‚¤ã‚º
+
+A4ã®PDFã§ã¯, width:595.303937007874, heght:841.889763779528ã§ã—ãŸã€‚
+ãŠãã‚‰ã72dpiã§ã®pxã§ã™ã€‚
+
+## ã‚³ãƒãƒ³ãƒ‰ä¾‹
+
+### ç¬¬ 26 å› JDA ç§‹å­£ãƒ‡ã‚£ãƒ™ãƒ¼ãƒˆå¤§ä¼šæ±ºå‹æˆ¦
+
+`python pdf_PDF2text.py F26TS.pdf -f 68`
+
+### ç¬¬ 15 å› JDA æ˜¥æœŸãƒ‡ã‚£ãƒ™ãƒ¼ãƒˆå¤§ä¼šæ±ºå‹æˆ¦
+
+`python pdf_PDF2text.py s15ts.pdf -b 304 -f 47`
+
+äºŒæ®µçµ„ã¿ã®å ´åˆ `-b 0`æŒ‡å®šã‚’ã™ã‚Œã°ç”¨ç´™ã®åŠåˆ†æŒ‡å®šã«ãªã‚Šã¾ã™ãŒã€ã™ã“ã—ãšã‚Œã¦ã„ã‚‹ã¨ã‚ã¦ã«ãªã‚‰ãªã„ã®ã§æ‰‹å‹•ã§æŒ‡å®šã—ã¾ã™ã€‚
+
+ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã®çµæœã‚’ã¿ã¦ã€è©²å½“éƒ¨åˆ†ã®
+
+- -bã«ã¯x0ã‚ˆã‚Šå°‘ã—å°ã•ã„å€¤
+- -fã«ã¯y0ã‚ˆã‚Šå°‘ã—å¤§ãã„å€¤
+
+ã‚’å…¥ã‚Œã¦ãã ã•ã„ã€‚
+
+## æ¦‚è¦ Description
+
+PDFãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚“ã§æ–‡å­—ã‚’ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚  
 Read a PDF file and output characters to a text file.  
 
-## “Á’¥ Features
+## ç‰¹å¾´ Features
 
-- ƒy[ƒW‚Ìƒwƒbƒ_[‚âƒtƒbƒ^[‚ğ’Šo‚Ì‘ÎÛ‚©‚çœ‚¯‚Ü‚·B  
-	Exclude page headers and footers from extraction.  
-- ƒy[ƒW‚ğw’è‚µ‚Ä’Šo‚Å‚«‚Ü‚·B  
-	You can specify the page to extract.  
-- 2’i‘g‚İ‚Ì•¶‘‚Å‚à’Šo‚Å‚«‚Ü‚·B  
-	You can also extract even a two-tiered document.  
+- ãƒšãƒ¼ã‚¸ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã‚„ãƒ•ãƒƒã‚¿ãƒ¼ã‚’æŠ½å‡ºã®å¯¾è±¡ã‹ã‚‰é™¤ã‘ã¾ã™ã€‚  
+ Exclude page headers and footers from extraction.  
+- ãƒšãƒ¼ã‚¸ã‚’æŒ‡å®šã—ã¦æŠ½å‡ºã§ãã¾ã™ã€‚  
+You can specify the page to extract.  
+- 2æ®µçµ„ã¿ã®æ–‡æ›¸ã§ã‚‚æŠ½å‡ºã§ãã¾ã™ã€‚  
+You can also extract even a two-tiered document.  
 
-## ˆË‘¶ŠÖŒW Requirement
+## ä¾å­˜é–¢ä¿‚ Requirement
 
 - Python 3.8.5
 - pdfminer.six 20201018
 
-## g‚¢•û Usage
+## ä½¿ã„æ–¹ Usage
 
 ```dosbatch
 usage: pdf_PDF2text.exe [-h] [-b n] [-f n] [-t n] [-s n] [-e n]
                         input_path [output_path]
 
 positional arguments:
-  input_path        “ü—Íƒtƒ@ƒCƒ‹–¼
-  output_path       o—Íƒtƒ@ƒCƒ‹–¼(default:Œ“ú_•ª_•b.txt)
+  input_path        å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«å
+  output_path       å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å(default:æœˆæ—¥_æ™‚åˆ†_ç§’.txt)
 
 optional arguments:
   -h, --help        show this help message and exit
-  -b n, --border n  ’i‘g‚İ‚ÌØ‚ê–Ú 0‚Ìê‡A—p†•‚Ì”¼•ª(default:1)
-  -f n, --footer n  ƒtƒbƒ^[ˆÊ’u(default:30)
-  -t n, --top n     ƒwƒbƒ_[ˆÊ’u(default:1000)
-  -s n, --s_page n  ŠJnƒy[ƒW(default:1)
-  -e n, --e_page n  I—¹ƒy[ƒW(0:ÅI)(default:0)
+  -b n, --border n  æ®µçµ„ã¿ã®åˆ‡ã‚Œç›® 0ã®å ´åˆã€ç”¨ç´™å¹…ã®åŠåˆ†(default:1)
+  -f n, --footer n  ãƒ•ãƒƒã‚¿ãƒ¼ä½ç½®(default:30)
+  -t n, --top n     ãƒ˜ãƒƒãƒ€ãƒ¼ä½ç½®(default:1000)
+  -s n, --s_page n  é–‹å§‹ãƒšãƒ¼ã‚¸(default:1)
+  -e n, --e_page n  çµ‚äº†ãƒšãƒ¼ã‚¸(0:æœ€çµ‚)(default:0)
 ```
 
-## ƒCƒ“ƒXƒg[ƒ‹•û–@ Installation
+## ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ–¹æ³• Installation
 
 - pip install pdfminer.six
 
-## ƒvƒƒOƒ‰ƒ€‚Ìà–¾ƒTƒCƒg Program description site
+## ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®èª¬æ˜ã‚µã‚¤ãƒˆ Program description site
 
-[PDF‚©‚çƒeƒLƒXƒg‚ğ’Šo(ƒvƒƒOƒ‰ƒ€)yPythonz - ƒvƒƒOƒ‰ƒ€‚Å‚¨‚©‚¦‚µ‚Å‚«‚é‚©‚È](https://juu7g.hatenablog.com/entry/Python/PDF/program)  
+[PDFã‹ã‚‰ãƒ†ã‚­ã‚¹ãƒˆã‚’æŠ½å‡º(ãƒ—ãƒ­ã‚°ãƒ©ãƒ )ã€Pythonã€‘ - ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ãŠã‹ãˆã—ã§ãã‚‹ã‹ãª](https://juu7g.hatenablog.com/entry/Python/PDF/program)  
 
-## ìÒ Authors
+## ä½œè€… Authors
+
 juu7g
 
-## ƒ‰ƒCƒZƒ“ƒX License
-‚±‚Ìƒ\ƒtƒgƒEƒFƒA‚ÍAMITƒ‰ƒCƒZƒ“ƒX‚Ì‚à‚Æ‚ÅŒöŠJ‚³‚ê‚Ä‚¢‚Ü‚·BLICENSE.txt‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B  
+## ç·¨é›† Editor
+
+@miikun77
+
+## ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ License
+
+ã“ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã¯ã€MITãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã®ã‚‚ã¨ã§å…¬é–‹ã•ã‚Œã¦ã„ã¾ã™ã€‚LICENSE.txtã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚  
 This software is released under the MIT License, see LICENSE.txt.
-
-
