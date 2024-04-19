@@ -152,8 +152,7 @@ class ConvertPDF2text():
                     if element.y0 > self.header: continue  # ヘッダー位置の文字は抽出しない
                     _text =element.get_text()
                     # debug
-                    print("x1:{}, x0:{}■{}".format(element.x1, element.x0, _text))
-                    print("y1:{}, y0:{}■{}".format(element.y1, element.y0, _text))
+                    print("x1:{}, x0:{}, y1:{}, y0:{}■{}".format(element.x1, element.x0, element.y1, element.y0, _text))
 
                     if element.x1 < self.border:
                         # 文字列全体が左側
