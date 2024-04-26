@@ -17,18 +17,19 @@ A4のPDFでは, width:595.303937007874, heght:841.889763779528でした。
 
 ### 第 26 回 JDA 秋季ディベート大会決勝戦
 
-`python pdf_PDF2text.py F26TS.pdf -f 68`
+`python pdf_PDF2text.py pdf/F26TS.pdf output/F26TS.txt -f 68`
 
 ### 第 15 回 JDA 春期ディベート大会決勝戦
 
-`python pdf_PDF2text.py s15ts.pdf -b 304 -f 47`
+`python pdf_PDF2text.py pdf/s15ts.pdf output/s15ts.txt -b 304 -f 47`
 
 二段組みの場合 `-b 0`指定をすれば用紙の半分指定になりますが、すこしずれているとあてにならないので手動で指定します。
 
 ターミナルの結果をみて、該当部分の
 
-- -bにはx0より少し小さい値
-- -fにはy0より少し大きい値
+- -bにはx0より少し小さい値 (区切り位置)
+- -tにはy0より少し小さい値 (ヘッター)
+- -fにはy1より少し大きい値 (フッター)
 
 を入れてください。
 
